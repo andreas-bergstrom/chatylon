@@ -2,6 +2,8 @@
 
 Simple server-rendered chat app.
 
+![Chatylon user list](screenshot.png)
+
 ## Dependencies
 - Django
 - django-crispy-forms
