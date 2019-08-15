@@ -1,0 +1,32 @@
+{% extends '_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12 mt-2">
+            <a href="{% url 'chat:threads' %}"><i class="fas fa-arrow-left"></i> back to users list</a>
+        </div>
+    </div>
+    <h2>{{ other_user.get_full_name }}</h2>
+    <hr>
+    <div class="messages col-12">
+    {% for message in messages %}
+        <div class="row{% if message.sender == user %} justify-content-end{% endif %}">
+            <div class="chat-bubble{% if message.sender == user %} my-message{% endif %}">
+                {{ message.body }}
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-primary" role="alert">
+          No messages in this conversation yet.
+        </div>
+    {% endfor %}
+    </div>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-primary" value="Send">
+    </form>
+{% endblock %}

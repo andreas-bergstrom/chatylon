@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+{% block body %}
+    <h2>Conversations</h2>
+    <hr>
+    <ul class="list-group">
+    {% for other_user in users.all %}
+        <a class="list-group-item list-group-item-action" href="{% url 'chat:messages' other_user.id %}"><span><i class="fas fa-user-circle"></i> <strong>{{ other_user.get_full_name }}</strong></span>
+            {% if other_user.thread_modified %}
+                <div class="text-muted">
+                    {% if other_user.last_message_sender_id == user.pk %}You: {% endif %}{{ other_user.last_message_body|truncatechars:25 }} - {{ other_user.thread_modified|timesince }}</div>
+            {% endif %}</a>
+        {% empty %}
+        <div class="alert alert-primary" role="alert">
+          No other users in this system yet. Invite some of your friends!
+        </div>
+    {% endfor %}
+    </ul>
+{% endblock %}
