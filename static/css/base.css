@@ -1,0 +1,13 @@
+.chat-bubble {
+	background: #b4b4b4;
+	margin-bottom: 0.5rem;
+	padding: 0.4rem;
+	color: #fff;
+}
+
+.chat-bubble.my-message {
+	background: #4968ff;
+}
+
+.chat-info {
+}

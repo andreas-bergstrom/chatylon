@@ -14,7 +14,7 @@ pip-selfcheck.json
 # Django related
 # src/<yourproject>/settings/local.py
 # static-cdn/  # any collected static files
-/static/
+# /static/
 /media/
 
 # Byte-compiled / optimized / DLL files
