@@ -27,7 +27,8 @@ class MessagesListView(LoginRequiredMixin, generic.FormView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['messages'] = Message.objects.messages_in_thread(thread=self.get_thread())
+        thread = Thread.get_thread_between(user1_id=self.request.user.pk, user2_id=self.kwargs['pk'])
+        context['messages'] = Message.objects.messages_in_thread(thread=thread)
         context['other_user'] = get_object_or_404(CustomUser, pk=self.kwargs['pk'])
 
         return context
@@ -35,21 +36,12 @@ class MessagesListView(LoginRequiredMixin, generic.FormView):
     def form_valid(self, form):
         form.sender = self.request.user
         form.other_user_pk = self.kwargs['pk']
-        form.thread = self.get_thread()
+        form.thread = Thread.get_thread_between(user1_id=form.sender.pk, user2_id=form.other_user_pk)
         form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('chat:messages', args=[self.kwargs['pk']])
-
-    def get_thread(self):
-        other_user = self.kwargs['pk']
-        me_user = self.request.user.pk
-
-        thread = Thread.objects.filter(participants__in=[me_user])
-        thread = thread.filter(participants__in=[other_user])
-
-        return thread.first()
 
 class NotFoundView(generic.TemplateView):
     response_class = TemplateResponseNotFound

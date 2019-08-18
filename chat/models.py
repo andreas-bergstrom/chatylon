@@ -13,6 +13,13 @@ class Thread(TimeStampedModel):
     def __str__(self):
         return str(self.pk)
 
+    @staticmethod
+    def get_thread_between(user1_id, user2_id):
+        thread = Thread.objects.filter(participants__in=[user1_id])
+        thread = thread.filter(participants__in=[user2_id])
+
+        return thread.first()
+
 
 class Message(TimeStampedModel):
     objects = MessageManager()
