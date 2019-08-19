@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'chatylon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': config('DB_ENGINE'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'HOST': config('DB_PASS'),
+        'PORT': config('DB_PORT'),
     }
 }
 

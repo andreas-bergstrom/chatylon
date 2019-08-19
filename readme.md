@@ -6,6 +6,7 @@ Simple server-rendered chat app.
 
 ## Dependencies
 - Django
+- psycopg2
 - django-crispy-forms
 - django-debug-toolbar
 - django-model-utils
@@ -13,17 +14,14 @@ Simple server-rendered chat app.
 
 ## Instructions
 
-1. Create and enter the venv:
-> python3 -m venv venv && source venv/bin/activate
+1. Build the containers:
+> docker-compose build
 
-2. Install dependencies:
-> pip install -r requirements.txt
+2. Edit and rename default .env:
+> docker-compose run web mv .default_env .env
 
-3. Rename default .env
-> mv .default_env .env
+3. Run Django migrations:
+> docker-compose run web python manage.py migrate
 
-4. Run Django migrations:
-> python manage.py migrate
-
-5. Launch development server
-> python manage.py runserver 8000
+4. Launch all containers:
+> docker-compose up
