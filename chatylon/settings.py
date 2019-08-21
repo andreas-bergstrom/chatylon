@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': config('DB_ENGINE'),
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
-        'HOST': config('DB_PASS'),
+        'HOST': config('DB_HOST'),
         'PORT': config('DB_PORT'),
     }
 }
