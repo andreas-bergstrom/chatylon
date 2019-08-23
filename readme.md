@@ -11,17 +11,15 @@ Simple server-rendered chat app.
 - django-debug-toolbar
 - django-model-utils
 - python-decouple
+- django-redis-cache
 
 ## Instructions
 
-1. Build the containers:
-> docker-compose build
-
-2. Edit and rename default .env:
+1. Edit and rename default .env:
 > docker-compose run web mv .default_env .env
 
-3. Run Django migrations:
+2. Run Django migrations:
 > docker-compose run web python manage.py migrate
 
-4. Launch all containers:
+3. Launch all containers:
 > docker-compose up
