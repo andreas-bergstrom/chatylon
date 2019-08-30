@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from model_utils.models import TimeStampedModel
 
-from chat.managers import MessageManager
+from chat.managers import MessageQuerySet
 
 
 class Thread(TimeStampedModel):
@@ -22,7 +22,7 @@ class Thread(TimeStampedModel):
 
 
 class Message(TimeStampedModel):
-    objects = MessageManager()
+    objects = MessageQuerySet.as_manager()
     thread = models.ForeignKey('chat.Thread', on_delete=models.CASCADE)
     body = models.TextField()
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
