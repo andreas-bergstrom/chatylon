@@ -27,6 +27,9 @@ class Message(TimeStampedModel):
     body = models.TextField()
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ('created',)
+
     def __str__(self):
         return self.body
 
