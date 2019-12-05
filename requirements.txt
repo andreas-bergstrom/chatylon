@@ -1,5 +1,5 @@
 coverage==4.5.4
-Django==2.2.4
+Django==2.2.8
 psycopg2
 django-redis
 django-crispy-forms==1.7.2
